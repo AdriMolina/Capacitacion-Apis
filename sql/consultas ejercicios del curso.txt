@@ -1,0 +1,21 @@
+- Consulta para traer todo
+
+SELECT * FROM academic;
+
+- Ejemplo consultas por columnas
+
+SELECT Anoemplead FROM academic;
+
+- Columnas calculadas.
+
+select mnombre, mcostolab, mcostolab * .10 as Ayuda
+ from materia;
+
+-Consulta con columnas constantes
+
+select 'La materia', Mnombre, 'tiene', Mcred, 'créditos' from materia;
+
+- Consulta para eliminar filas duplicadas
+
+select distinct mnocarrera 
+from materia;
