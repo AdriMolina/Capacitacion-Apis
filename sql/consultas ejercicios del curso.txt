@@ -19,3 +19,29 @@ select 'La materia', Mnombre, 'tiene', Mcred, 'créditos' from materia;
 
 select distinct mnocarrera 
 from materia;
+
+-Clausula where
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab >= 100;
+
+-Predicado de rango BETWEEN
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab BETWEEN 100 AND 200;
+
+
+Negacion de between
+
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab NOT BETWEEN 100 AND 200;
+
+Con caracteres.
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab BETWEEN 'B' AND 'D';
