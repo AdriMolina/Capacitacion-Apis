@@ -1,0 +1,124 @@
+- Consulta para traer todo
+
+SELECT * FROM academic;
+
+- Ejemplo consultas por columnas
+
+SELECT Anoemplead FROM academic;
+
+- Columnas calculadas.
+
+select mnombre, mcostolab, mcostolab * .10 as Ayuda
+ from materia;
+
+-Consulta con columnas constantes
+
+select 'La materia', Mnombre, 'tiene', Mcred, 'créditos' from materia;
+
+- Consulta para eliminar filas duplicadas
+
+select distinct mnocarrera 
+from materia;
+
+-Clausula where
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab >= 100;
+
+-Predicado de rango BETWEEN
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab BETWEEN 100 AND 200;
+
+
+Negacion de between
+
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab NOT BETWEEN 100 AND 200;
+
+Con caracteres.
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcostolab BETWEEN 'B' AND 'D';
+
+- Predicado de pertinencia
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcred NOT IN (10, 8);
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mcred <> 10 AND  Mcred  <> 8;
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mnombre LIKE '%discretas%';
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+WHERE Mnombre NOT LIKE '_I%';
+
+
+- Predicado de valor NULL
+
+SELECT Gnogrupo, Gnomateria, Gnomaestro, Gdias, Gsalon
+FROM Grupo
+WHERE Gnomaestro IS NULL;
+
+- Predicados compuestos
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera
+FROM Materia
+WHERE Mnocarrera = '32' OR Mnocarrera = '38';
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera
+FROM Materia
+WHERE Mnocarrera = '32' AND Mcostolab > 100;
+
+select * from materia 
+where (Mnocarrera = '32' and Mcred =8);
+
+- Ordenar resultados.
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+ORDER BY Mcostolab;
+
+
+Busquedas por alias
+
+SELECT M.Mnomateria, M.Mnombre
+FROM Materia M
+ WHERE M.Mnomateria = '0076';
+
+
+- Consultas multitablas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
