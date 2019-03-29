@@ -379,3 +379,26 @@ la sentencia udate es utiizada para modificar lo existente
 la sentencia delete elimina una o mas filas de una tabla
 */
 
+select * from Materia;
+
+insert into materia
+values('01721','poemaciones', null, null ,32);
+
+insert into cmateria
+select *
+From materia 
+where mnocarrera = 32;
+
+select * from materia 
+where Mnomateria like '00%';
+
+delete from materia
+where mnomateria like '00%';
+
+update materia
+set Mcostolab = 150.00
+where mnomateria = '0177';
+
+select * from materia where mnomateria = '0177'
+
+update materia set mcred = mcred + 10;
