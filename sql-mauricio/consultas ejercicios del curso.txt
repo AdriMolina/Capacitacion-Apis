@@ -72,13 +72,32 @@ WHERE Gnomaestro IS NULL;
 
 - Predicados compuestos
 
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera
+FROM Materia
+WHERE Mnocarrera = '32' OR Mnocarrera = '38';
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera
+FROM Materia
+WHERE Mnocarrera = '32' AND Mcostolab > 100;
+
+select * from materia 
+where (Mnocarrera = '32' and Mcred =8);
+
+- Ordenar resultados.
+
+SELECT Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab
+FROM Materia
+ORDER BY Mcostolab;
 
 
+Busquedas por alias
+
+SELECT M.Mnomateria, M.Mnombre
+FROM Materia M
+ WHERE M.Mnomateria = '0076';
 
 
-
-
-
+- Consultas multitablas.
 
 
 
