@@ -103,22 +103,279 @@ FROM Materia M
 
 
 
+SELECT Mnomateria, Mnombre, Mnocarrera, Cnombre
+FROM Materia, Carrera
+ WHERE Cnocarrera = Mnocarrera;
+
+
+- Operador JOIN
+
+select Mnomateria, Mnombre, Mnocarrera, Cnombre
+from materia, carrera 
+where cnocarrera = mnocarrera;
+
+
+select Mnomateria, mnombre, Mnocarrera, cnombre
+from materia inner join carrera
+on Cnocarrera = Mnocarrera;
+
+select Gnomateria, gnomaestro, anombre
+from academic inner join grupo
+on anoemplead = gnomaestro;
+
+
+/*LEFT OUTER JOIN
+a)Regresa todas las filas de la tabla de la izquierda
+b)Regresa la informacipon que tiene en común con la otra tabla 
+por medio de la clausula ON
+
+RIGHT OUTER JOIN
+a)Regresa todas las filas de la tabla de la derecha
+b)Regresa la informacion que tiene en comun con
+la otra tabla por medio de la clausula ON
+*/
+-- Tenemos 10 materias:
+select * from materia;
+
+-- Tenemos 7 grupos:
+
+select * from grupo;
+
+
+
+-- Generar un reporte de todas las materias
+-- con su grupo o clase asignada e incluir las
+-- materias que no tienen grupo asignado.
+
+-- ya sabemos como mostrar la información que accessible
+-- coincide en ambas tablas:
+
+select gnogrupo, mnombre, Mcred
+from materia as m inner join grupo as g
+on m.mnomateria = g.gnomateria;
 
 
 
 
 
 
+select gnogrupo, mnombre, Mcred
+from materia as m left outer join grupo as g
+on m.mnomateria = g.gnomateria;
+
+select gnogrupo, mnombre, Mcred
+from materia as m right outer join grupo as g
+on m.mnomateria = g.gnomateria;
+
+
+
+select gnogrupo, mnombre, Mcred, mnocarrera, Cnombre
+from grupo as g right outer join materia as m
+on m.mnomateria = g.gnomateria
+inner join carrera on mnocarrera = cnocarrera
+where mnocarrera = 32;
+
+-- Seleccionar a todos los numeros y nombre de los ma
+
+SELECT anoemplead numero, Anombre, 'A'
+from academic
+union 
+select enocuenta, enombre, 'E'
+From estudian
+order by anombre;
+
+
+SELECT anoemplead numero, Anombre, 'A'
+from academic
+union 
+select enocuenta, enombre, 'E'
+From estudian
+order by anombre;
+
+-- funciones sumatorias avg sum max min
+
+
+-- SUM()
+-- suma de valores en una columna
+
+-- ejemplo: ¿cual es la suma de todos los costos de laboratorio?
+
+select SUM(mcostolab) from materia;
+
+select AVG(Mcostolab) from materia;
+
+
+-- MAX() y MIN()
+
+-- Ejemplo: ¿cual es el valor minimo y maximo de todos los costos de laboratorio?
+
+select * from materia;
+select MAX(mcostolab) from materia;
+
+
+
+
+-- COUNT (*)
+
+-- Regresa el numero de filas seleccionadas
+
+-- Ejemplo: ¿Cuantas materias de Computacion existen?
+
+select count(*) from materia where mnocarrera = 32;
+
+
+-- distinct
+-- Regresa numeros de filas seleccionadas
+
+-- Ejemplo: ¿Cuantas carreras diferentes hay en la tabla de materia?
+
+select count(distinct mnocarrera) from materia;
 
 
 
 
 
+select mnocarrera, AVG (Mcostolab)
+from materia
+group by mnocarrera;
+
+
+SELECT Mnocarrera, SUM(Mcostolab)
+FROM materia
+WHERE Mcred = 8
+GROUP BY Mnocarrera
+ORDER BY Mnocarrera DESC;
+
+
+SELECT Mnocarrera, SUM(Mcostolab)
+FROM materia
+WHERE Mcred = 8
+GROUP BY Mnocarrera
+ORDER BY Mnocarrera DESC;
+select *from materia where mcred =8;
+
+-- Ejemplo: listar el máximo costo de laboratorio, 
+-- agrupados por el numero de creditos y separando
+-- las diferentes carreras
+use universidad;
+
+SELECT Materia.mcred, Materia.mnocarrera,
+max(Materia.Mcostolab)
+from materia
+group by materia.mcred, materia.mnocarrera;
+
+
+-- Clausula having
+
+-- Ejemplo: Obtener el numero de la carrera y
+-- el valor promedio del costo de laboratorio
+-- solo para las carreras en los que el costo
+-- promeido exceda $100
+
+select Mnocarrera, AVG(Mcostolab)
+from materia
+group by Mnocarrera 
+having AVG(Mcostolab)>100;
+
+
+select Mnocarrera, AVG(Mcostolab)
+from materia
+where Mcostolab >0
+group by Mnocarrera 
+having AVG(Mcostolab)>100;
+
+
+
+-- subconsultas
+-- El sistema regresa el valor de $500
+-- lo que nos permite escribir la siguiente sentencia:
+SELECT max(mcostolab)
+FROM materia;
+
+SELECT Mnocarrera, mnombre
+FROM materia
+where mcostolab = (SELECT max(mcostolab)
+FROM materia);
+ 
+/*
+Diferencias entre subconsultas y sentencia select
+- una subconsulta solo debe producir una columna de datos 
+como resultado, es decir que una subconsulta solo tiene un elemento
+en la clausula SELECT
+- La clausula ORDER BY no puede ser especificada en una 
+subconsulta
+- Lo resultados de una subconsulta no son visibles, esta es la razon
+por la que no tiene sentido una subconsulta
+- Una subconsulta no puede ser la union de varias sentencias
+diferentes, solo se permite una sentencia SELECT
+
+
+
+*/
+
+
+use universidad;
+SELECT mnomateria, mnombre, Mcostolab
+FROM materia
+where Mcostolab > 
+(select MIN(academic.asueldo * .05)
+from academic);
 
 
 
 
+SELECT anombre, asueldo
+FROM academic
+where anocarrera in 
+(select cnocarrera
+from carrera
+where cedificio ='A501'); 
+
+
+SELECT Gnogrupo, Gnomaestro
+FROM grupo 
+where exists
+(select * from academic
+where Anoemplead = Gnomaestro);
+
+
+SELECT Gnogrupo, Gnomaestro
+FROM grupo 
+where not exists
+(select * from academic
+where Anoemplead = Gnomaestro);
+
+
+-- subconsultas anidadas
+
+/*
+Visualizar el numero y nombre de academico que sea coordinador de la carrera
+que tenga materias con 8 creditos
+*/ 
+
+SELECT academic.Anoemplead, academic.Anombre
+FROM academic
+where academic.anoemplead IN
+(select carrera.ccoord
+FROM carrera
+where carrera.Cnocarrera in
+(select materia.Mnocarrera
+from materia
+where materia.mcred =8));
+
+select Mnocarrera, AVG (Mcostolab)
+from materia
+group by Mnocarrera
+having AVG (Mcostolab) <
+(select AVG (Mcostolab)
+from materia);
 
 
 
+
+/*
+la sentencia insert se usa para agregar filas a una tabla vacia o ya contenida
+la sentencia udate es utiizada para modificar lo existente
+la sentencia delete elimina una o mas filas de una tabla
+*/
 
