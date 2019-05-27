@@ -1,0 +1,13 @@
+select * from carrera;
+select mnombre, mcostolab, mcostolab * .10 as ayuda from materia;
+select Mnomateria, Mnombre, Mcred, Mnocarrera, Mcostolab from Materia where Mcostolab >=100;
+select Gnogrupo, Gnomateria, Gnomaestro, Gdias, Gsalon from Grupo where Gnomaestro IS null;
+select Mnomateria, Mnombre, Mnocarrera from Materia Where not Mnocarrera = '32';
+select Mnomateria, Mnombre, Mcostolab *1.10 from Materia order by 3 desc;
+select carrera.cnocarrera, carrera.Cnombre from carrera where carrera.Cnocarrera = 32;
+select materia.* from materia;
+select Mnomateria, Mnombre, Cnombre from Materia inner join carrera on Cnocarrera = Mnocarrera;
+select Gnomateria, Gnomaestro, Anombre from Academic inner join grupo on Anoemplead = Gnomaestro;
+select Gnogrupo, Mnombre, Mcred from Materia as m left outer join Grupo as g on m.Mnomateria = g.Gnomateria;
+select Gnogrupo, Mnombre, Mcred, Mnocarrera from Materia as m left outer join Grupo as g on m.Mnomateria = g.Gnomateria where Mnocarrera = 32;
+select Gnogrupo, Mnombre, Mcred, carrera.Cnombre from Materia as m left outer join Grupo as g on m.Mnomateria = g.Gnomateria inner join carrera on Mnocarrera = Cnocarrera where Mnocarrera = 32;
